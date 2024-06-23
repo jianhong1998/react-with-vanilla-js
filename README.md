@@ -53,3 +53,94 @@ This is a Demo to showcase about using React and MUI in pure HTML and Vanilla JS
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
 ```
+
+## Example of Usage
+
+```JavaScript
+const { useState } = React;
+
+const {
+    colors,
+    CssBaseline,
+    ThemeProvider,
+    createTheme,
+    Box,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+} = MaterialUI;
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#556cd6',
+        },
+        secondary: {
+            main: '#19857b',
+        },
+        error: {
+            main: colors.red.A400,
+        },
+    },
+});
+
+const App = () => {
+    const [age, setAge] = useState(null);
+
+    const onClickHandler = () => {
+        alert('hi');
+    };
+
+    const selectOnChangeHandler = (e) => {
+        const value = e.target.value;
+        setAge(value);
+    };
+
+    return (
+        <Box
+            width={500}
+            margin={1}
+        >
+            <FormControl>
+                <InputLabel id='demo-simple-select-label'>
+                    Age
+                </InputLabel>
+                <Select
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
+                    value={age ?? 0}
+                    label='Age'
+                    onChange={selectOnChangeHandler}
+                >
+                    <MenuItem
+                        value={0}
+                        disabled
+                    >
+                        -
+                    </MenuItem>
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+            </FormControl>
+
+            <Button
+                onClick={onClickHandler}
+                variant='outlined'
+            >
+                Click Me
+            </Button>
+        </Box>
+    );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <ThemeProvider theme={theme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <App />
+    </ThemeProvider>
+);
+```
